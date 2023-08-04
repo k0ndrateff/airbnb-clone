@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Nunito } from 'next/font/google'
 import Navbar from "@/app/components/navbar/Navbar";
 import ClientOnly from "@/app/components/ClientOnly";
+import Modal from "@/app/components/modals/Modal";
 
 const font = Nunito({ subsets: ['latin', 'cyrillic'] })
 
@@ -16,6 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <html lang="ru">
         <body className={font.className}>
             <ClientOnly>
+                <Modal />
                 <Navbar />
             </ClientOnly>
             {children}
