@@ -61,8 +61,8 @@ const LoginModal:React.FC = () => {
     const footerContent = (
         <div className={'flex flex-col gap-4 mt-3'}>
             <hr />
-            <Button outline label={'Войти через Гугл'} icon={FcGoogle} onClick={() => {}} />
-            <Button outline label={'Войти через Гитхаб'} icon={AiFillGithub} onClick={() => {}} />
+            <Button outline label={'Войти через Гугл'} icon={FcGoogle} onClick={() => signIn('google')} />
+            <Button outline label={'Войти через Гитхаб'} icon={AiFillGithub} onClick={() => signIn('github')} />
             <div className={'text-neutral-500 text-center mt-4 font-light'}>
                 <div className={'justify-center flex flex-row items-center gap-2'}>
                     <div>
