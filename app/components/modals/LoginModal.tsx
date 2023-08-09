@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import axios from "axios";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
@@ -20,6 +20,7 @@ import {useRouter} from "next/navigation";
 const LoginModal:React.FC = () => {
     const registerModal = useRegisterModal();
     const loginModal = useLoginModal();
+
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const router = useRouter();
@@ -50,6 +51,11 @@ const LoginModal:React.FC = () => {
             });
     };
 
+    const toggleModal = useCallback(() => {
+        loginModal.onClose();
+        registerModal.onOpen();
+    }, [loginModal, registerModal]);
+
     const bodyContent = (
         <div className={'flex flex-col gap-4'}>
             <Heading  title={'Добро пожаловать домой'} subtitle={'Войдите в свой аккаунт!'} />
@@ -66,10 +72,10 @@ const LoginModal:React.FC = () => {
             <div className={'text-neutral-500 text-center mt-4 font-light'}>
                 <div className={'justify-center flex flex-row items-center gap-2'}>
                     <div>
-                        Уже есть аккаунт?
+                        Первый раз на AirPnP?
                     </div>
-                    <div className={'text-neutral-800 cursor-pointer hover:underline'} onClick={registerModal.onClose}>
-                        Войти
+                    <div className={'text-neutral-800 cursor-pointer hover:underline'} onClick={toggleModal}>
+                        Создайте аккаунт
                     </div>
                 </div>
             </div>

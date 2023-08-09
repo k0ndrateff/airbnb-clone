@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import axios from "axios";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
@@ -14,9 +14,12 @@ import Input from "@/app/components/inputs/Input";
 import toast from "react-hot-toast";
 import Button from "@/app/components/Button";
 import {signIn} from "next-auth/react";
+import useLoginModal from "@/app/hooks/useLoginModal";
 
 const RegisterModal:React.FC = () => {
     const registerModal = useRegisterModal();
+    const loginModal = useLoginModal();
+
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const { register, handleSubmit, formState: { errors } } = useForm<FieldValues>({
@@ -42,6 +45,11 @@ const RegisterModal:React.FC = () => {
             })
     };
 
+    const toggleModal = useCallback(() => {
+        registerModal.onClose();
+        loginModal.onOpen();
+    }, [loginModal, registerModal]);
+
     const bodyContent = (
         <div className={'flex flex-col gap-4'}>
             <Heading  title={'Добро пожаловать на AirPnP'} subtitle={'Создайте аккаунт!'} />
@@ -61,8 +69,8 @@ const RegisterModal:React.FC = () => {
                     <div>
                         Уже есть аккаунт?
                     </div>
-                    <div className={'text-neutral-800 cursor-pointer hover:underline'} onClick={registerModal.onClose}>
-                        Войти
+                    <div className={'text-neutral-800 cursor-pointer hover:underline'} onClick={toggleModal}>
+                        Войдите
                     </div>
                 </div>
             </div>
