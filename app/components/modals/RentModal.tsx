@@ -7,7 +7,8 @@ import Heading from "@/app/components/Heading";
 import {categories} from "@/app/components/navbar/Categories";
 import CategoryInput from "@/app/components/inputs/CategoryInput";
 import {FieldValues, useForm} from "react-hook-form";
-import {it} from "node:test";
+import CountrySelect from "@/app/components/inputs/CountrySelect";
+import dynamic from "next/dynamic";
 
 enum STEPS {
     CATEGORY,
@@ -47,6 +48,11 @@ const RentModal = () => {
     });
 
     const category = watch('category');
+    const location = watch('location');
+
+    const Map = useMemo(() => dynamic(() => import('@/app/components/Map'), {
+        ssr: false
+    }), [location]);
 
     const setCustomValue = (id: string, value: any) => {
         setValue(id, value, {
@@ -82,7 +88,7 @@ const RentModal = () => {
 
     let bodyContent = (
         <div className={'flex flex-col gap-8'}>
-            <Heading title={'Что из этого лучше всего описывает ваш дом?'}
+            <Heading title={'Что из этого лучше всего описывает ваше жильё?'}
                      subtitle={'Выберите категорию'}
             />
             <div className={'grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto'}>
@@ -100,12 +106,22 @@ const RentModal = () => {
         </div>
     );
 
+    if (step === STEPS.LOCATION) {
+        bodyContent = (
+          <div className={'flex flex-col gap-8 '}>
+              <Heading title={'Где находится жильё?'} subtitle={'Помогите гостям найти вас!'} />
+              <CountrySelect onChange={(value) => setCustomValue('location', value)} value={location} />
+              <Map center={location?.latlng} />
+          </div>
+        );
+    }
+
     return (
         <Modal title={'Создание листинга'}
                body={bodyContent}
                isOpen={rentModal.isOpen}
                onClose={rentModal.onClose}
-               onSubmit={rentModal.onClose}
+               onSubmit={onNext}
                actionLabel={actionLabel}
                secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
                secondaryActionLabel={secondaryActionLabel}
