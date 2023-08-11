@@ -6,11 +6,15 @@ import {useMemo, useState} from "react";
 import Heading from "@/app/components/Heading";
 import {categories} from "@/app/components/navbar/Categories";
 import CategoryInput from "@/app/components/inputs/CategoryInput";
-import {FieldValues, useForm} from "react-hook-form";
+import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
 import CountrySelect from "@/app/components/inputs/CountrySelect";
 import dynamic from "next/dynamic";
 import Counter from "@/app/components/inputs/Counter";
 import ImageUpload from "@/app/components/inputs/ImageUpload";
+import Input from "@/app/components/inputs/Input";
+import axios from "axios";
+import toast from "react-hot-toast";
+import {useRouter} from "next/navigation";
 
 enum STEPS {
     CATEGORY,
@@ -22,9 +26,11 @@ enum STEPS {
 }
 
 const RentModal = () => {
+    const router = useRouter();
     const rentModal = useRentModal();
 
     const [step, setStep] = useState<STEPS>(STEPS.CATEGORY);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const {
         register,
@@ -74,6 +80,26 @@ const RentModal = () => {
 
     const onNext = () => {
       setStep((value) => value + 1);
+    };
+    
+    const onSubmit: SubmitHandler<FieldValues> = (data) => {
+      if (step !== STEPS.PRICE) return onNext();
+
+      setIsLoading(true);
+      axios.post('/api/listings', data)
+          .then(() => {
+              toast.success('Листинг создан!');
+              router.refresh();
+              reset();
+              setStep(STEPS.CATEGORY);
+              rentModal.onClose();
+          })
+          .catch(() => {
+             toast.error('Что-то пошло не так.');
+          })
+          .finally(() => {
+             setIsLoading(false);
+          });
     };
 
     const actionLabel = useMemo(() => {
@@ -156,12 +182,34 @@ const RentModal = () => {
         );
     }
 
+    if (step === STEPS.DESCRIPTION) {
+        bodyContent = (
+          <div className={'flex flex-col gap-8'}>
+              <Heading title={'Как бы вы описали ваше жильё?'} subtitle={'Лаконичное описание привлечет гостей'} />
+              <Input id={'title'} label={'Название'} register={register} errors={errors} disabled={isLoading} required />
+              <hr />
+              <Input id={'description'} label={'Описание'} register={register} errors={errors} disabled={isLoading} required />
+          </div>
+        );
+    }
+
+    if (step === STEPS.PRICE) {
+        bodyContent = (
+          <div className={'flex flex-col gap-8'}>
+              <Heading title={'Теперь установите цену'} subtitle={'Сколько стоит жильё за ночь?'} />
+              <Input id={'price'} label={'Цена за ночь'} register={register} errors={errors} type={'number'}
+                     disabled={isLoading} formatPrice required
+              />
+          </div>
+        );
+    }
+
     return (
         <Modal title={'Создание листинга'}
                body={bodyContent}
                isOpen={rentModal.isOpen}
                onClose={rentModal.onClose}
-               onSubmit={onNext}
+               onSubmit={handleSubmit(onSubmit)}
                actionLabel={actionLabel}
                secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
                secondaryActionLabel={secondaryActionLabel}

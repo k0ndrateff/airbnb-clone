@@ -2,7 +2,7 @@
 
 import React from "react";
 import {FieldErrors, FieldValues, UseFormRegister} from "react-hook-form";
-import {BiDollar} from "react-icons/bi";
+import {BiRuble} from "react-icons/bi";
 
 type InputProps = {
     id: string;
@@ -22,7 +22,7 @@ const Input:React.FC<InputProps> = ({ id, label, type, disabled,
     return (
         <div className={'w-full relative'}>
             {formatPrice && (
-                <BiDollar size={24} className={'text-neutral-700 absolute top-5 left-2'} />
+                <BiRuble size={24} className={'text-neutral-700 absolute top-5 left-2'} />
             )}
 
             <input id={id}
