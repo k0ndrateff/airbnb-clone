@@ -17,22 +17,24 @@ type CountrySelectProps = {
     onChange: (value: CountrySelectValue) => void;
 };
 
+const lookupRegions: any = {
+    'Americas': 'Америка',
+    'Asia': 'Азия',
+    'Europe': 'Европа',
+    'Africa': 'Африка',
+    'Oceania': 'Океания',
+    'Antarctic': 'Антарктика',
+    'Arctic': 'Арктика',
+};
+
+export const translateRegion = (region?: string) => {
+    if (!region) return '';
+
+    return lookupRegions[region];
+};
+
 const CountrySelect:React.FC<CountrySelectProps> = ({ value, onChange }) => {
     const { getAll } = useCountries();
-
-    const lookupRegions: any = {
-      'Americas': 'Америка',
-      'Asia': 'Азия',
-      'Europe': 'Европа',
-      'Africa': 'Африка',
-      'Oceania': 'Океания',
-      'Antarctic': 'Антарктика',
-      'Arctic': 'Арктика',
-    };
-
-    const translateRegion = (region: string) => {
-        return lookupRegions[region];
-    };
 
     return (
         <div>
