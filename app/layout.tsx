@@ -12,8 +12,8 @@ import RentModal from "@/app/components/modals/RentModal";
 const font = Nunito({ subsets: ['latin', 'cyrillic'] })
 
 export const metadata: Metadata = {
-  title: 'AirPnP - живи свободно!',
-  description: 'AirPnP - сайт по поиску съёмного жилья на любой срок.',
+  title: 'AirBnB Clone',
+  description: 'AirBnB - сайт по поиску съёмного жилья на любой срок.',
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
