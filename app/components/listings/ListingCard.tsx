@@ -2,7 +2,7 @@
 
 import React, {useCallback, useMemo} from "react";
 import {Reservation} from "@prisma/client";
-import {SafeListing, SafeUser} from "@/app/types";
+import {SafeListing, SafeReservation, SafeUser} from "@/app/types";
 import {useRouter} from "next/navigation";
 import useCountries from "@/app/hooks/useCountries";
 import { format } from 'date-fns';
@@ -11,10 +11,11 @@ import HeartButton from "@/app/components/HeartButton";
 import {translateRegion} from "@/app/components/inputs/CountrySelect";
 import {categories} from "@/app/components/navbar/Categories";
 import Button from "@/app/components/Button";
+import { ru } from 'date-fns/locale';
 
 type ListingCardProps = {
     data: SafeListing;
-    reservation?: Reservation;
+    reservation?: SafeReservation;
     onAction?: (id: string) => void;
     disabled?: boolean;
     actionLabel?: string;
@@ -50,7 +51,7 @@ const ListingCard:React.FC<ListingCardProps> = ({ data, reservation, onAction, d
         const start = new Date(reservation.startDate);
         const end = new Date(reservation.endDate);
 
-        return `${format(start, 'PP')} - ${format(end, 'PP')}`;
+        return `${format(start, 'PP', {locale: ru})} - ${format(end, 'PP', {locale: ru})}`;
     }, [reservation]);
 
     return (

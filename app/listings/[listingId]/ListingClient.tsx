@@ -65,8 +65,7 @@ const ListingClient:React.FC<ListingClientProps> = ({ reservations = [], listing
             .then(() => {
                 toast.success('Жильё забронировано!');
                 setDateRange(initialDateRange);
-            //     TODO: Redirect to /trips
-                router.refresh();
+                router.push('/trips');
             })
             .catch(() => {
                 toast.error('Произошла ошибка при бронировании.');
