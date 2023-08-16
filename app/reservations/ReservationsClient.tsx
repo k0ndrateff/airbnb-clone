@@ -9,12 +9,12 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import ListingCard from "@/app/components/listings/ListingCard";
 
-type TripsClientProps = {
+type ReservationsClientProps = {
     reservations: SafeReservation[];
     currentUser?: SafeUser | null;
 };
 
-const TripsClient:React.FC<TripsClientProps> = ({ reservations, currentUser }) => {
+const ReservationsClient:React.FC<ReservationsClientProps> = ({ reservations, currentUser }) => {
     const router = useRouter();
     const [deletingId, setDeletingId] = useState<string>('');
 
@@ -36,9 +36,9 @@ const TripsClient:React.FC<TripsClientProps> = ({ reservations, currentUser }) =
 
     return (
         <Container>
-            <Heading title={'Поездки'} subtitle={'Где вы были и где вам ещё предстоит побывать'} />
+            <Heading title={'Бронирования'} subtitle={'Места, которые гости зарезервировали у вас'} />
             <div className={'mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5' +
-                            ' 2xl:grid-cols-6 gap-8'}>
+                ' 2xl:grid-cols-6 gap-8'}>
                 {reservations.map(reservation => (
                     <ListingCard key={reservation.id}
                                  data={reservation.listing}
@@ -46,7 +46,7 @@ const TripsClient:React.FC<TripsClientProps> = ({ reservations, currentUser }) =
                                  actionId={reservation.id}
                                  onAction={onCancel}
                                  disabled={deletingId === reservation.id}
-                                 actionLabel={'Отменить бронь'}
+                                 actionLabel={'Отменить гостевую бронь'}
                                  currentUser={currentUser}
                     />
                 ))}
@@ -54,4 +54,4 @@ const TripsClient:React.FC<TripsClientProps> = ({ reservations, currentUser }) =
         </Container>
     );
 };
-export default TripsClient;
+export default ReservationsClient;

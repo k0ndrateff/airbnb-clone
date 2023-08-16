@@ -35,6 +35,8 @@ const RegisterModal:React.FC = () => {
 
         axios.post('/api/register', data)
             .then(() => {
+                toast.success('Успешная регистрация!');
+                loginModal.onOpen();
                 registerModal.onClose();
             })
             .catch((error) => {

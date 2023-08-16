@@ -60,8 +60,8 @@ const UserMenu:React.FC<UserMenuProps> = ({ currentUser }) => {
                             <>
                                 <MenuItem onClick={() => router.push('/trips')} label={'Поездки'} />
                                 <MenuItem onClick={() => {}} label={'Избранные места'} />
-                                <MenuItem onClick={() => {}} label={'Бронирования'} />
-                                <MenuItem onClick={() => {}} label={'Лоты'} />
+                                <MenuItem onClick={() => router.push('/reservations')} label={'Бронирования'} />
+                                <MenuItem onClick={() => {}} label={'Мои листинги'} />
                                 <MenuItem onClick={rentModal.onOpen} label={'Создать листинг'} />
                                 <hr />
                                 <MenuItem onClick={() => signOut()} label={'Выйти'} />
