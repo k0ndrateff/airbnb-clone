@@ -12,3 +12,17 @@ You can run demo by cloning this repository and running:
 ```shell
 npm run dev
 ```
+
+You also should create a _.env_ file to store some environment variables. There are 7 of them:
+```dotenv
+DATABASE_URL= // URL to your MongoDB database.
+NEXTAUTH_SECRET= // Any string to be secret for auth 
+
+GITHUB_ID= // ID for Github OAuth
+GITHUB_SECRET= // Secret for Github OAuth
+
+GOOGLE_CLIENT_ID= // ID for Google OAuth
+GOOGLE_CLIENT_SECRET= // Secret for Google OAuth
+
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME= // Cloud name on Cloudinary service. Used as CDN to store images.
+```

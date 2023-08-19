@@ -32,7 +32,7 @@ export default async function getReservations(params: IParams) {
             }
         });
 
-        return reservations.map(reservation => ({
+        return reservations.map((reservation: any) => ({
             ...reservation,
             createdAt: reservation.createdAt.toISOString(),
             startDate: reservation.startDate.toISOString(),

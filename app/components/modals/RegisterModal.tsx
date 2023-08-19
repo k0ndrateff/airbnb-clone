@@ -39,7 +39,7 @@ const RegisterModal:React.FC = () => {
                 loginModal.onOpen();
                 registerModal.onClose();
             })
-            .catch((error) => {
+            .catch(() => {
                 toast.error('Что-то пошло не так.');
             })
             .finally(() => {

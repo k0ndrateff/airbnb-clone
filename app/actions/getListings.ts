@@ -50,7 +50,7 @@ export default async function getListings(params: IListingsParams) {
             }
         });
 
-        return listings.map((listing) => ({
+        return listings.map((listing: any) => ({
             ...listing,
             createdAt: listing.createdAt.toISOString()
         }));

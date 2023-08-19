@@ -1,7 +1,6 @@
 "use client";
 
 import React, {useCallback, useMemo} from "react";
-import {Reservation} from "@prisma/client";
 import {SafeListing, SafeReservation, SafeUser} from "@/app/types";
 import {useRouter} from "next/navigation";
 import useCountries from "@/app/hooks/useCountries";

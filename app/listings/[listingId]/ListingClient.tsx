@@ -1,7 +1,6 @@
 "use client";
 
 import React, {useCallback, useEffect, useMemo, useState} from "react";
-import {Reservation} from "@prisma/client";
 import {SafeListing, SafeReservation, SafeUser} from "@/app/types";
 import {categories} from "@/app/components/navbar/Categories";
 import Container from "@/app/components/Container";

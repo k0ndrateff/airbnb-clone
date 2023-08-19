@@ -17,7 +17,7 @@ export default async function getFavoriteListings() {
             }
         });
 
-        return favorites.map(favorite => ({
+        return favorites.map((favorite: any) => ({
             ...favorite,
             createdAt: favorite.createdAt.toISOString()
         }));

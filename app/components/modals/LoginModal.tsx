@@ -1,7 +1,6 @@
 "use client";
 
 import React, {useCallback, useState} from "react";
-import axios from "axios";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { signIn } from "next-auth/react";
