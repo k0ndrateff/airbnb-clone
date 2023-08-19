@@ -8,6 +8,7 @@ import ToasterProvider from "@/app/providers/ToasterProvider";
 import LoginModal from "@/app/components/modals/LoginModal";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import RentModal from "@/app/components/modals/RentModal";
+import SearchModal from "@/app/components/modals/SearchModal";
 
 const font = Nunito({ subsets: ['latin', 'cyrillic'] })
 
@@ -26,6 +27,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                     <ToasterProvider />
                     <LoginModal />
                     <RegisterModal />
+                    <SearchModal />
                     <RentModal />
                     <Navbar currentUser={currentUser} />
                 </ClientOnly>
