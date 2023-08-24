@@ -7,6 +7,10 @@ with Prisma.
 
 Project is not completed and is subject to change.
 
+**Production deployment on Vercel:** [Click to go](https://vercel.com/k0ndrateff/booking-app/jkT6Ps9nyLRUNzBuVEL5hZFY5FJW)
+
+## Running Demo
+
 You can run demo by cloning this repository and running:
 
 ```shell
