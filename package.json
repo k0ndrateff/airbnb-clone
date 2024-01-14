@@ -1,6 +1,6 @@
 {
   "name": "booking-app",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "homepage": "https://booking-app-blush.vercel.app/",
   "scripts": {
