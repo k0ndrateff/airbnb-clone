@@ -9,6 +9,8 @@ Project is not completed and is subject to change.
 
 **Production deployment on Vercel:** [Click to go](http://booking-app-k0ndrateff.vercel.app/)
 
+We experience issues with DB right now.
+
 ## Running Demo
 
 You can run demo by cloning this repository and running:
